@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
-class LoginPage extends React.Component {
-  render () {
+class LoginPage extends React.Component
+{
+  render ()
+  {
     return(
       <div>
         <h1> Login Page </h1>
-        
       </div>
-    )
+    );
   }
 }
 
