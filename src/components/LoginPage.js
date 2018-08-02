@@ -6,12 +6,17 @@ import { login } from '../actions/auth';
 
 class LoginPage extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+    this.submit = this.submit.bind(this);
+  }
   submit(data)
   {
     this.props.login(data)
-      .then(()=> {
-        this.props.history.push('/');
-      });
+      .then( () =>
+        this.props.history.push('/')
+      );
   }
   render ()
   {
