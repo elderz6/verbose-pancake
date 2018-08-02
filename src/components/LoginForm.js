@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Label, Input } from 'semantic-ui-react';
+import { Form, Button, Label, Input, Message} from 'semantic-ui-react';
 import Validator from 'validator';
 import LineError from './LineError';
 import PropTypes from 'prop-types';
@@ -54,17 +54,24 @@ class LoginForm extends React.Component {
       this.props.submit(this.state.data)
         .catch(err => this.setState(
           {
-            errors:err.response.data.errors
+            errors:err.response.data.errors,
+            loading:false
           }
         ));
     }
   }
 
   render () {
-    const { data, errors } = this.state;
+    const { data, errors, loading } = this.state;
     return(
       <div>
-        <Form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit} loading={ loading }>
+          { errors.global && (
+            <Message negative>
+              <Message.Header> Something went Wrong </Message.Header>
+              <p>{ errors.global }</p>
+            </Message>
+          )}
           <Form.Field error={!!errors.email}>
             <Label>Email</Label>
             <Input
