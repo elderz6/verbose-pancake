@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Button } from 'semantic-ui-react';
+import { logout } from '../actions/auth';
+
 
 class HomePage extends React.Component
 {
@@ -9,16 +12,21 @@ class HomePage extends React.Component
   {
     super(props);
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: true
     };
   }
+
   render () {
     return(
       <div>
         <h1> Home Page </h1>
-      { this.props.isAuthenticated
-        ? <button> Logout</button>
-        :  <Link to='/login'> Login </Link>}
+      {
+        this.props.isAuthenticated
+        ?
+        (<Button onClick = {() => this.props.logout() }> Logout</Button>)
+        :
+        (<Link to='/login'> Login </Link>)
+      }
       </div>
     );
   }
@@ -26,7 +34,8 @@ class HomePage extends React.Component
 
 HomePage.propTypes =
 {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
 const mapStatetoProps = state =>
@@ -36,4 +45,4 @@ const mapStatetoProps = state =>
   }
 }
 
-export default connect(mapStatetoProps)(HomePage);
+export default connect(mapStatetoProps, { logout })(HomePage);
