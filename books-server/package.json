@@ -14,7 +14,9 @@
     "babel-preset-env": "^1.7.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "mongoose": "^5.2.6",
     "nodemon": "^1.18.3"
   }
 }
