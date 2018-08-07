@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
+import {
+  Button,
+  Menu,
+  Container
+  } from 'semantic-ui-react';
 import { logout } from '../actions/auth';
+import MenuComp from './Menu';
 
 
 class HomePage extends React.Component
@@ -12,22 +17,30 @@ class HomePage extends React.Component
   {
     super(props);
     this.state = {
+      visible:false,
       isAuthenticated: true
     };
   }
 
   render () {
     return(
-      <div>
+      <Container style={{margin: '20px'}}>
+        <MenuComp />
         <h1> Home Page </h1>
-      {
-        this.props.isAuthenticated
-        ?
-        (<Button onClick = {() => this.props.logout() }> Logout</Button>)
-        :
-        (<Link to='/login'> Login </Link>)
-      }
-      </div>
+        {
+          this.props.isAuthenticated
+            ?
+            (<Menu.Item onClick = {() => this.props.logout() }> Logout</Menu.Item>)
+            :
+            (
+              <Link to='/login'>
+                <Menu.Item>
+                  Login
+                </Menu.Item>
+              </Link>
+            )
+        }
+      </Container>
     );
   }
 }
@@ -36,13 +49,13 @@ HomePage.propTypes =
 {
   isAuthenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
-}
+};
 
 const mapStatetoProps = state =>
 {
   return{
     isAuthenticated: !!state.user.token
-  }
-}
+  };
+};
 
 export default connect(mapStatetoProps, { logout })(HomePage);

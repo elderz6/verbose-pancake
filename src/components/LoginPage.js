@@ -16,7 +16,7 @@ class LoginPage extends React.Component
     return(
       this.props.login(data)
         .then( () =>
-          this.props.history.push('/')
+          this.props.history.push('/dashboard')
         ));
   }
   render ()
