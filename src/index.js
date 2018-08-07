@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'semantic-ui-css/semantic.min.css';
@@ -24,7 +24,7 @@ if (localStorage.bookJWT) {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Route component={App} />
     </BrowserRouter>
   </Provider>
   , document.getElementById('root'));

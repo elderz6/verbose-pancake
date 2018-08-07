@@ -27,19 +27,21 @@ class HomePage extends React.Component
       <Container style={{margin: '20px'}}>
         <MenuComp />
         <h1> Home Page </h1>
-        {
-          this.props.isAuthenticated
-            ?
-            (<Menu.Item onClick = {() => this.props.logout() }> Logout</Menu.Item>)
-            :
-            (
-              <Link to='/login'>
-                <Menu.Item>
-                  Login
-                </Menu.Item>
-              </Link>
-            )
-        }
+        <Button>
+          {
+            this.props.isAuthenticated
+              ?
+              (<Menu.Item onClick = {() => this.props.logout() }> Logout</Menu.Item>)
+              :
+              (
+                <Link to='/login'>
+                  <Menu.Item>
+                    Login
+                  </Menu.Item>
+                </Link>
+              )
+          }
+        </Button>
       </Container>
     );
   }

@@ -4,28 +4,13 @@ import { connect } from 'react-redux';
 import ConfirmEmailMessage from './ConfirmEmailMessage';
 
 
-class DashboardPage extends React.Component {
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      isConfirmed: false
-    };
-  }
-
-  render () {
-    const {isConfirmed} = this.state;
-    return(
-      <div>
-        <h1> Dashboard </h1>
-        {
-          !isConfirmed && <ConfirmEmailMessage />
-        }
-      </div>
-    );
-  }
-}
-
+const DashboardPage = ({ isConfirmed }) => (
+  <div>
+    {
+      !isConfirmed && <ConfirmEmailMessage />
+    }
+  </div>
+)
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired
 };
