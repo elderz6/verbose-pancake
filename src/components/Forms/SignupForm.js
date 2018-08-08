@@ -1,27 +1,27 @@
 import React from 'react';
-import { Form, Button, Label, Input, Message } from 'semantic-ui-react';
-import Validator from 'validator';
-import LineError from './LineError';
 import PropTypes from 'prop-types';
+import { Form, Button, Message, Label, Input } from 'semantic-ui-react';
+import Validator from 'validator';
+import LineError from '../LineError';
 
-class LoginForm extends React.Component {
+class SignupForm extends React.Component {
+
   constructor(props)
   {
     super(props);
-    this.state =
-    {
-      data:{
+    this.state = {
+      data: {
         email:'',
-        password:''
+        password:'',
+        confirmPassword:''
       },
       loading:false,
       errors:{}
     };
     this.onSubmit = this.onSubmit.bind(this);
-    this.validate = this.validate.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.validate = this.validate.bind(this);
   }
-
   onChange(e)
   {
     this.setState({
@@ -31,7 +31,6 @@ class LoginForm extends React.Component {
       }
     });
   }
-
   validate(data)
   {
     const errors = {};
@@ -43,6 +42,9 @@ class LoginForm extends React.Component {
     {
       errors.password= 'Password cannot be empty';
     }
+    if (data.password != data.confirmPassword) {
+      errors.confirmPassword= 'Passwords must match';
+    }
     return errors;
   }
 
@@ -52,21 +54,15 @@ class LoginForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state.data)
-        .catch(err => this.setState(
-          {
-            errors:err.response.data.errors,
-            loading:false
-          }
-        ));
+      this.props.submit(this.state.data);
     }
   }
-
-  render () {
+  render ()
+  {
     const { data, errors, loading } = this.state;
     return(
       <div>
-        <Form onSubmit={this.onSubmit} loading={ loading }>
+        <Form onSubmit={this.onSubmit} loading={ loading } style={{padding:'20px'}}>
           { errors.global && (
             <Message negative>
               <Message.Header> Something went Wrong </Message.Header>
@@ -101,8 +97,20 @@ class LoginForm extends React.Component {
             {errors.password && <LineError text={ errors.password }/>}
           </Form.Field>
 
+          <Form.Field error={!!errors.confirmPassword}>
+            <Label>Confirm Password</Label>
+            <Input
+              type='password'
+              id='confirmPassword'
+              name='confirmPassword'
+              value={data.confirmPassword}
+              onChange={this.onChange}
+            />
+            {errors.confirmPassword && <LineError text={ errors.confirmPassword }/>}
+          </Form.Field>
+
           <Button primary>
-            Login
+            Sign Up
           </Button>
         </Form>
       </div>
@@ -110,8 +118,8 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = {
-  submit : PropTypes.func.isRequired
+SignupForm.propTypes = {
+  submit: PropTypes.func.isRequired
 };
 
-export default LoginForm;
+export default SignupForm;

@@ -10,7 +10,7 @@ const DashboardPage = ({ isConfirmed }) => (
       !isConfirmed && <ConfirmEmailMessage />
     }
   </div>
-)
+);
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired
 };

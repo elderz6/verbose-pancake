@@ -6,10 +6,9 @@ import {
   Button,
   Menu,
   Container
-  } from 'semantic-ui-react';
+} from 'semantic-ui-react';
 import { logout } from '../actions/auth';
 import MenuComp from './Menu';
-
 
 class HomePage extends React.Component
 {
@@ -27,21 +26,30 @@ class HomePage extends React.Component
       <Container style={{margin: '20px'}}>
         <MenuComp />
         <h1> Home Page </h1>
-        <Button>
-          {
-            this.props.isAuthenticated
-              ?
-              (<Menu.Item onClick = {() => this.props.logout() }> Logout</Menu.Item>)
-              :
-              (
-                <Link to='/login'>
+
+        {
+          this.props.isAuthenticated
+            ?
+            (<Menu.Item onClick = {() => this.props.logout() }> Logout</Menu.Item>)
+            :
+            (<div>
+              <Link to='/login'>
+                <Button>
                   <Menu.Item>
                     Login
                   </Menu.Item>
-                </Link>
-              )
-          }
-        </Button>
+                </Button>
+              </Link>
+              <Link to='/signup'>
+                <Button>
+                  <Menu.Item>
+                    Signup
+                  </Menu.Item>
+                </Button>
+              </Link>
+            </div>
+            )
+        }
       </Container>
     );
   }

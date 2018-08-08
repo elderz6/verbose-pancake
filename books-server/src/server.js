@@ -2,13 +2,18 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import auth from './routes/auth';
 import dotenv from 'dotenv';
 
+import auth from './routes/auth';
+import users from './routes/users';
+
 dotenv.config();
+
 const port = 8080;
 const app = express();
 app.use(bodyParser.json());
+
+app.use('/api/users', users);
 app.use('/api/auth', auth);
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })

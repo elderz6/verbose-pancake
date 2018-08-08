@@ -19,7 +19,7 @@ const store = createStore(
 if (localStorage.bookJWT) {
   const user = { token: localStorage.bookJWT };
   store.dispatch(userLoggedIn(user));
- }
+}
 
 ReactDOM.render(
   <Provider store={store}>
