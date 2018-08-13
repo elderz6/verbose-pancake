@@ -56,18 +56,14 @@ class SignupForm extends React.Component {
       this.setState({ loading: true });
       this.props
         .submit(this.state.data)
-        .catch(err =>{
-          console.log(err);
-          return(
-            this.setState(
-              {
-                errors:err.response.data.errors,
-                loading:false
-              }
-            ));
-        });
-    }
-  }
+        .catch(err =>
+          this.setState(
+            {
+              errors:err.response.data.errors,
+              loading:false
+            }
+          ));
+    }}
 
   render ()
   {
@@ -75,12 +71,7 @@ class SignupForm extends React.Component {
     return(
       <div>
         <Form onSubmit={this.onSubmit} loading={ loading } style={{padding:'20px'}}>
-          { errors.global && (
-            <Message negative>
-              <Message.Header> Something went Wrong </Message.Header>
-              <p>{ errors.global }</p>
-            </Message>
-          )}
+
           <Form.Field error={!!errors.email}>
             <Label>Email</Label>
             <Input

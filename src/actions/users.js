@@ -5,10 +5,8 @@ export const signup = data =>
   dispatch =>
     api.user.signup(data)
       .then(user => {
-        return(
-        // localstorage.bookJWT = user.token;
-          dispatch(userLoggedIn(user))
-        );
+        localStorage.bookJWT = user.token;
+        dispatch(userLoggedIn(user));
       }
       )
       .catch(err => console.log(err));
