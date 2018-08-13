@@ -13,10 +13,11 @@ class SignupPage extends React.Component {
   }
   submit(data)
   {
-    this.props.signup(data)
-      .then(() =>
-        this.props.history.push('/dashboard')
-      );
+    return(
+      this.props.signup(data)
+        .then(() =>
+          this.props.history.push('/dashboard')
+        ));
   }
   render () {
     return(

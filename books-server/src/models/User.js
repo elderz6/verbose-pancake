@@ -5,10 +5,17 @@ import uniqueValidator from 'mongoose-unique-validator';
 
 const userSchema = new mongoose.Schema(
   {
-    email : { type: String, required: true, lowercase:true, unique:true },
+    email : {
+      type: String,
+      required: true,
+      lowercase:true,
+      index:true,
+      unique:true
+    },
     pwHash : { type: String, required: true },
     confirmed: { type:Boolean, default:false}
-  },{ timestamps: true }
+  },
+  { timestamps: true }
 );
 
 userSchema.methods.isValidPassword = function isValidPassword(password)
@@ -26,7 +33,8 @@ userSchema.methods.generateJWT = function generateJWT()
   return jwt.sign(
     {
       email: this.email
-    },process.env.JWT_SECRET
+    },
+    process.env.JWT_SECRET
   );
 };
 

@@ -13,12 +13,12 @@ const port = 8080;
 const app = express();
 app.use(bodyParser.json());
 
-app.use('/api/users', users);
-app.use('/api/auth', auth);
-
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })
   .then(() => console.log('connected'))
   .catch(err => console.log(err));
+
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 app.get('/*', (req, res) =>
 {
