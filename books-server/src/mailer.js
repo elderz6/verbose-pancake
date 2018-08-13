@@ -22,7 +22,7 @@ export function sendConfirmationEmail(user)
     from,
     to: user.email,
     subject: 'confirmation Email',
-    text: `Confirm ${user.generateConfirmURL}`
+    text: `Confirm \n  ${user.generateConfirmURL()}`
   };
   transport.sendMail(email);
 }
