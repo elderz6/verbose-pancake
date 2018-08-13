@@ -16,7 +16,8 @@ export const login = credentials => dispatch =>
     {
       localStorage.bookJWT = user.token;
       dispatch(userLoggedIn(user));
-    });
+    })
+    .catch(err => console.log(err));
 
 export const logout = () => dispatch =>
 {

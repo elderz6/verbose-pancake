@@ -8,9 +8,8 @@ import {
   Container
 } from 'semantic-ui-react';
 import { logout } from '../actions/auth';
-import MenuComp from './Menu';
 
-class HomePage extends React.Component
+export class HomePage extends React.Component
 {
   constructor(props)
   {
@@ -23,33 +22,43 @@ class HomePage extends React.Component
 
   render () {
     return(
-      <Container style={{margin: '20px'}}>
-        <MenuComp />
-        <h1> Home Page </h1>
-
-        {
-          this.props.isAuthenticated
-            ?
-            (<Menu.Item onClick = {() => this.props.logout() }> Logout</Menu.Item>)
-            :
-            (<div>
-              <Link to='/login'>
-                <Button>
-                  <Menu.Item>
-                    Login
-                  </Menu.Item>
-                </Button>
-              </Link>
-              <Link to='/signup'>
-                <Button>
-                  <Menu.Item>
-                    Signup
-                  </Menu.Item>
-                </Button>
-              </Link>
-            </div>
-            )
-        }
+      <Container>
+        <div>
+          {
+            this.props.isAuthenticated
+              ?
+              (<Menu.Item onClick = {() => this.props.logout()}><Button> Logout </Button></Menu.Item>)
+              :
+              (<div>
+                <Link to='/login'>
+                  <Button id='logbtn'>
+                    <Menu.Item>
+                      Login
+                    </Menu.Item>
+                  </Button>
+                </Link>
+                <Link to='/signup'>
+                  <Button id='signbtn'>
+                    <Menu.Item>
+                      Signup
+                    </Menu.Item>
+                  </Button>
+                </Link>
+              </div>
+              )
+          }
+        </div>
+        <Container>
+          <h1> Home Page </h1>
+          <article>
+            lorem ipsum etc
+            lorem ipsum etc
+            lorem ipsum etc
+            lorem ipsum etc
+            lorem ipsum etc
+            lorem ipsum etc
+          </article>
+        </Container>
       </Container>
     );
   }

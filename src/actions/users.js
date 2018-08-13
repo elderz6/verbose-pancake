@@ -4,5 +4,8 @@ import { userLoggedIn } from './auth';
 export const signup = data =>
   dispatch =>
     api.user.signup(data)
-      .then(user =>
-        dispatch(userLoggedIn(user)));
+      .then(user =>{
+        // localstorage.bookJWT = user.token;
+        dispatch(userLoggedIn(user));
+      })
+      .catch(err => console.log(err));
