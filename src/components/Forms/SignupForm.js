@@ -72,13 +72,12 @@ class SignupForm extends React.Component {
     const { data, errors, loading } = this.state;
     const err = { errors };
     const listErr = Object.keys( err ).map((i) => {
-      return(<Label key={ i }> { errors[i] } </Label>)
+      return(<p key={ i }> { errors[i] } </p>)
     });
     return(
       <div>
         { console.log({errors}, listErr)}
         <Form onSubmit={this.onSubmit} loading={ loading } style={{padding:'20px'}}>
-          {listErr}
           <Form.Field error={!!errors.email}>
             <Label>Email</Label>
             <Input
@@ -90,6 +89,7 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
             />
             {errors.email && <LineError text={ errors.email }/>}
+            { errors && <LineError  text={ listErr }/>}
           </Form.Field>
 
           <br />
