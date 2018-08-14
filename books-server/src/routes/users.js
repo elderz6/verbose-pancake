@@ -2,6 +2,7 @@ import express from 'express';
 import User from '../models/User';
 import parseErrors from '../utils/parseErrors';
 import { sendConfirmationEmail } from '../mailer';
+import { renderToString } from 'react-dom/server';
 
 const router = express.Router();
 
@@ -18,10 +19,14 @@ router.post('/', (req, res) =>
       res.json({ user: user.toAuthJSON() });
     })
     .catch(err =>{
-      console.log(err);
-      res.status(400)
-        .json({ errors: parseErrors(err.errors) });
+      const fail = err.errors.email.message;
+      console.log(fail);
+      return(
+        res.status(400)
+          .json({ errors:fail })
+      );
     });
 });
+
 
 export default router;

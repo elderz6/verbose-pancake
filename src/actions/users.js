@@ -7,6 +7,4 @@ export const signup = data =>
       .then(user => {
         localStorage.bookJWT = user.token;
         dispatch(userLoggedIn(user));
-      }
-      )
-      .catch(err => console.log(err));
+      });

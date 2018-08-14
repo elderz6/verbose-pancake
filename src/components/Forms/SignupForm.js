@@ -4,6 +4,7 @@ import { Form, Button, Message, Label, Input } from 'semantic-ui-react';
 import Validator from 'validator';
 import LineError from '../LineError';
 
+
 class SignupForm extends React.Component {
 
   constructor(props)
@@ -25,6 +26,7 @@ class SignupForm extends React.Component {
   onChange(e)
   {
     this.setState({
+      ...this.state,
       data:
       {
         ...this.state.data, [e.target.name]: e.target.value
@@ -56,22 +58,27 @@ class SignupForm extends React.Component {
       this.setState({ loading: true });
       this.props
         .submit(this.state.data)
-        .catch(err =>
+        .catch(errors =>
           this.setState(
             {
-              errors:err.response.data.errors,
+              errors:errors.response.data,
               loading:false
-            }
-          ));
+            })
+        );
     }}
 
   render ()
   {
     const { data, errors, loading } = this.state;
+    const err = { errors };
+    const listErr = Object.keys( err ).map((i) => {
+      return(<Label key={ i }> { errors[i] } </Label>)
+    });
     return(
       <div>
+        { console.log({errors}, listErr)}
         <Form onSubmit={this.onSubmit} loading={ loading } style={{padding:'20px'}}>
-
+          {listErr}
           <Form.Field error={!!errors.email}>
             <Label>Email</Label>
             <Input
