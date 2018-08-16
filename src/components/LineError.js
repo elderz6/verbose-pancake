@@ -10,7 +10,10 @@ const LineError = ({ text }) =>
 
 LineError.propTypes =
 {
-  text:PropTypes.string.isRequired
+  text:PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]).isRequired
 };
 
 export default LineError;

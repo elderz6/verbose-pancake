@@ -72,11 +72,10 @@ class SignupForm extends React.Component {
     const { data, errors, loading } = this.state;
     const err = { errors };
     const listErr = Object.keys( err ).map((i) => {
-      return(<p key={ i }> { errors[i] } </p>)
+      return(<p key={ i }> { errors[i] } </p>);
     });
     return(
       <div>
-        { console.log({errors}, listErr)}
         <Form onSubmit={this.onSubmit} loading={ loading } style={{padding:'20px'}}>
           <Form.Field error={!!errors.email}>
             <Label>Email</Label>

@@ -29,34 +29,40 @@ userSchema.methods.setPassword = function setPassword(password)
   this.pwHash = bcrypt.hashSync(password, 10);
 };
 
+//Confirmation token setup
 userSchema.methods.setConfirmationToken = function setConfirmationToken()
 {
   this.confirmationToken = this.generateJWT();
 };
 
+//Generate confirmation URL
 userSchema.methods.generateConfirmURL = function generateConfirmURL() {
   return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
 };
 
+//Generate JSON Web Token
 userSchema.methods.generateJWT = function generateJWT()
 {
-  return jwt.sign(
-    {
-      email: this.email
-    },
+  return jwt.sign({ email: this.email },
     process.env.JWT_SECRET
   );
 };
 
 userSchema.methods.toAuthJSON = function toAuthJSON()
 {
-  return {
-    email: this.email,
-    confirmed:this.confirmed,
-    token:this.generateJWT()
-  };
+  const token = this.generateJWT();
+  if (token !== undefined) {
+    return {
+      email: this.email,
+      confirmed:this.confirmed,
+      token:token
+    };
+  }
+  else {
+    return({ errors: 'Something went wrong'});
+  }
 };
 
-userSchema.plugin(uniqueValidator, { message: 'email already in use'});
+userSchema.plugin(uniqueValidator, { message: 'Email already in use'});
 
 export default mongoose.model('User', userSchema);

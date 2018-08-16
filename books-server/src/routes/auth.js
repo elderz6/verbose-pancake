@@ -13,7 +13,7 @@ router.post('/', (req, res) =>
       }
       else {
         res.status(400).json({
-          errors: { global: 'invalid credentials' }
+          errors: { global: 'Invalid Credentials' }
         });
       }
     });

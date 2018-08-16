@@ -48,7 +48,7 @@ class ConfirmationPage extends Component {
             谢谢
             <Link to='/dashboard'>
               <Button>
-                Got to Dashboard
+                Go to Dashboard
               </Button>
             </Link>
           </Message.Header>

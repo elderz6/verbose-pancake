@@ -20,7 +20,6 @@ router.post('/', (req, res) =>
     })
     .catch(err =>{
       const fail = err.errors.email.message;
-      console.log(fail);
       return(
         res.status(400)
           .json({ errors:fail })
