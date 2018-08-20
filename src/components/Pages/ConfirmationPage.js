@@ -35,25 +35,27 @@ class ConfirmationPage extends Component {
     const {loading, success} = this.state;
     return (
       <div>
-        { loading && (<Message icon>
-          <Icon  name='circle notched' loading/>
-          <Message.Header>
+        { loading && (
+          <Message icon>
+            <Icon  name='circle notched' loading/>
+            <Message.Header>
             Validating the email
-          </Message.Header>
-        </Message>
+            </Message.Header>
+          </Message>
         )}
-        { !this.state.loading && (<Message success icon>
-          <Icon  name='checkmark'/>
-          <Message.Header>
-            谢谢
-            <Link to='/dashboard'>
-              <Button>
-                Go to Dashboard
-              </Button>
-            </Link>
-          </Message.Header>
-        </Message>
-        )}
+        { !loading && success &&
+          (<Message success icon>
+            <Icon  name='checkmark'/>
+            <Message.Header>
+              谢谢, Verified
+              <Link to='/dashboard'>
+                <Button>
+                  Go to Dashboard
+                </Button>
+              </Link>
+            </Message.Header>
+          </Message>
+          )}
       </div>
     );
   }

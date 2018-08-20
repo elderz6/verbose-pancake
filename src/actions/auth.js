@@ -27,4 +27,7 @@ export const logout = () => dispatch =>
 export const confirm = token =>
   dispatch => api.user.confirm(token)
     .then(user =>
-      dispatch(userLoggedIn(user)));
+    {
+      localStorage.bookJWT = user.token;
+      dispatch(userLoggedIn(user));
+    });

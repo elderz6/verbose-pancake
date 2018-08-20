@@ -37,7 +37,7 @@ userSchema.methods.setConfirmationToken = function setConfirmationToken()
 
 //Generate confirmation URL
 userSchema.methods.generateConfirmURL = function generateConfirmURL() {
-  return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
+  return `localhost:3000/confirmation/${this.confirmationToken}`;
 };
 
 //Generate JSON Web Token

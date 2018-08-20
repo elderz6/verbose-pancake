@@ -14,9 +14,9 @@ router.post('/', (req, res) =>
   user.setPassword(password);
   user.setConfirmationToken();
   user.save()
-    .then( user => {
-      sendConfirmationEmail(user);
-      res.json({ user: user.toAuthJSON() });
+    .then( userRecord => {
+      sendConfirmationEmail(userRecord);
+      res.json({ user: userRecord.toAuthJSON() });
     })
     .catch(err =>{
       const fail = err.errors.email.message;
